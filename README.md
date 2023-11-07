@@ -1,2 +1,3 @@
-# aarch64
-Docker files for aarch64 containers
+# AARCH64
+Script files for AARCH64 SBCs
+
