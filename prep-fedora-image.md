@@ -15,3 +15,12 @@ wget -c https://d2lzkl7pfhq30w.cloudfront.net/pub/fedora/linux/releases/39/Serve
 xz -d Fedora-Server-39-1.5.aarch64.raw.xz
 ./prep-fedora-image.sh -i ./Fedora-Server-39-1.5.aarch64.raw -o ./Fedora-Server-39-1.5.aarch64-opizw3.raw -u  u-boot_orangepi_zero3.bin -s 8 -d sun50i-h616-orangepi-zero3.dtb -f allwinner
 ```
+
+## How to customize official Fedora image for NanoPi R4S
+```bash
+wget -c https://github.com/deamen/u-boot-builder/releases/download/nanopi-r4s.v2023.11.7/u-boot_nanopi-r4s.bin
+wget -c https://github.com/deamen/dtb-builder/releases/download/nanopi-r4s.v2023.11.7/dtb_nanopi-r4s.dtb -O rk3399-nanopi-r4s.dtb
+wget -c https://d2lzkl7pfhq30w.cloudfront.net/pub/fedora/linux/releases/39/Server/aarch64/images/Fedora-Server-39-1.5.aarch64.raw.xz
+xz -d Fedora-Server-39-1.5.aarch64.raw.xz
+./prep-fedora-image.sh -i ./Fedora-Server-39-1.5.aarch64.raw -o ./Fedora-Server-39-1.5.aarch64-nanopi-r4s.raw -u  u-boot_nanopi-r4s.bin -s 32 -d rk3399-nanopi-r4s.dtb -f rockchip
+```

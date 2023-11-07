@@ -1,16 +1,5 @@
 #!/bin/bash
 
-# For Allwinner
-#./prep-fedora-image.sh -i ./Fedora-Server-39_Beta-1.1.aarch64.raw -o ./Fedora-Server-39_Beta-1.1.aarch64-opizw3.raw -u  u-boot-builder/out/u-boot-orangepi-zero3-with-spl.bin -s 8
-## For rockchip
-#./prep-fedora-image.sh -i ./Fedora-Server-39_Beta-1.1.aarch64.raw -o ./Fedora-Server-39_Beta-1.1.aarch64-opizw3.raw -u  u-boot-builder/out/u-boot-orangepi-zero3-with-spl.bin -s 32
-
-# Initialize variables with default values
-input_file=""
-output_file=""
-uboot_file=""
-dtb_file=""
-
 # Parse named arguments
 while getopts "i:o:u:d:s:f:" opt; do
   case "$opt" in
@@ -37,11 +26,6 @@ cp "$input_file" "$output_file"
 
 # Append 1GiB of zeroes to the end of the image
 dd if=/dev/zero bs=1M count=1024 >> "$output_file"
-
-# Move the partitions within the image to create space at the front
-#for i in 3 2 1; do
-#  echo "+16MiB" | sfdisk --move-data "$output_file" -N $i
-#done
 
 # Move the rootfs partition to the end of the image
 echo "+1024MiB" | sfdisk --move-data "$output_file" -N 3
