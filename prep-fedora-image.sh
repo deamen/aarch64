@@ -21,6 +21,24 @@ if [ -z "$input_file" ] || [ -z "$output_file" ] || [ -z "$uboot_file"  ] || [ -
   exit 1
 fi
 
+# Check if input_file exists
+if [ ! -f "$input_file" ]; then
+  echo "Error: input file '$input_file' does not exist."
+  exit 1
+fi
+
+# Check if uboot_file exists
+if [ ! -f "$uboot_file" ]; then
+  echo "Error: u-boot file '$uboot_file' does not exist."
+  exit 1
+fi
+
+# Check if dtb_file exists (if provided)
+if [ -n "$dtb_file" ] && [ ! -f "$dtb_file" ]; then
+  echo "Error: dtb file '$dtb_file' does not exist."
+  exit 1
+fi
+
 # Copy the original image
 cp "$input_file" "$output_file"
 
@@ -57,4 +75,3 @@ fi
 
 # Clean up by removing the loop device
 sudo losetup -d "$loop_device"
-
