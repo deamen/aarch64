@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Ensure the script is run as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Error: This script must be run as root."
+  exit 1
+fi
 # Parse named arguments
 while getopts "i:r:" opt; do
   case "$opt" in
