@@ -31,15 +31,15 @@ fi
 
 # Does not boot on Raspberry Pi 3 when using GPT
 # Use msdos partition table instead for compatibility
-parted ${raw_device} mklabel msdos
-parted ${raw_device} mkpart primary fat32 1MiB 4096MiB
+parted "${raw_device}" mklabel msdos
+parted "${raw_device}" mkpart primary fat32 1MiB 4096MiB
 # Make partition bootable
-parted ${raw_device} set 1 boot on
-mkfs.vfat -F 32 ${raw_device}1
-parted ${raw_device} mkpart primary ext4 4096MiB 100%
-mkfs.ext4 -F ${raw_device}2
+parted "${raw_device}" set 1 boot on
+mkfs.vfat -F 32 "${raw_device}"1
+parted "${raw_device}" mkpart primary ext4 4096MiB 100%
+mkfs.ext4 -F "${raw_device}"2
 
-mount ${raw_device}1 /mnt
+mount "${raw_device}"1 /mnt
 tar -zxf "$image_file" -C /mnt
 umount /mnt
 
