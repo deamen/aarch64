@@ -35,7 +35,7 @@ if [ ! -b "$raw_device" ]; then
 fi
 
 # Unmount any existing mounts on the target device to prevent 'device busy' errors
-umount ${raw_device}* 2>/dev/null || true
+umount "${raw_device}"* 2>/dev/null || true
 # Does not boot on Raspberry Pi 3 when using GPT
 # Use msdos partition table instead for compatibility
 parted "${raw_device}" mklabel msdos
